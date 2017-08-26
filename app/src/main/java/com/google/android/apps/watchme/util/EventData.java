@@ -61,4 +61,5 @@ public class EventData {
     public String getWatchUri() {
         return "http://www.youtube.com/watch?v=" + getId();
     }
+
 }

@@ -23,9 +23,8 @@ import android.os.Build;
 import android.util.Log;
 import android.widget.Toast;
 
+import com.eastern.doby.R;
 import com.google.android.apps.watchme.MainActivity;
-import com.google.android.apps.watchme.R;
-import com.google.android.gms.auth.GoogleAuthException;
 import com.google.android.gms.common.Scopes;
 import com.google.api.client.googleapis.json.GoogleJsonError;
 import com.google.api.client.googleapis.json.GoogleJsonResponseException;
@@ -105,8 +104,6 @@ public class Utils {
             if (details != null) {
                 message = details.getMessage();
             }
-        } else if (t.getCause() instanceof GoogleAuthException) {
-            message = ((GoogleAuthException) t.getCause()).getMessage();
         }
         showError(activity, message);
     }

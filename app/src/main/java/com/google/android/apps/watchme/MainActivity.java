@@ -14,15 +14,19 @@
 
 package com.google.android.apps.watchme;
 
+import android.Manifest;
 import android.accounts.AccountManager;
 import android.app.Activity;
 import android.app.Dialog;
 import android.app.ProgressDialog;
 import android.content.Intent;
 import android.content.SharedPreferences;
+import android.content.pm.PackageManager;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.preference.PreferenceManager;
+import android.support.v4.app.ActivityCompat;
+import android.support.v4.content.ContextCompat;
 import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
@@ -31,6 +35,7 @@ import android.view.Window;
 import android.widget.Button;
 
 import com.android.volley.toolbox.ImageLoader;
+import com.eastern.doby.R;
 import com.google.android.apps.watchme.util.EventData;
 import com.google.android.apps.watchme.util.NetworkSingleton;
 import com.google.android.apps.watchme.util.Utils;
@@ -96,6 +101,59 @@ public class MainActivity extends Activity implements
                 .findFragmentById(R.id.list_fragment);
     }
 
+    @Override
+    protected void onStart() {
+        super.onStart();
+        // Here, thisActivity is the current activity
+        if (ContextCompat.checkSelfPermission(this,
+                Manifest.permission.READ_CONTACTS)
+                != PackageManager.PERMISSION_GRANTED) {
+
+            // Should we show an explanation?
+            if (ActivityCompat.shouldShowRequestPermissionRationale(this,
+                    Manifest.permission.READ_CONTACTS)) {
+
+                // Show an explanation to the user *asynchronously* -- don't block
+                // this thread waiting for the user's response! After the user
+                // sees the explanation, try again to request the permission.
+
+            } else {
+
+                // No explanation needed, we can request the permission.
+
+                ActivityCompat.requestPermissions(this,
+                        new String[]{Manifest.permission.GET_ACCOUNTS}, 20);
+
+                // MY_PERMISSIONS_REQUEST_READ_CONTACTS is an
+                // app-defined int constant. The callback method gets the
+                // result of the request.
+            }
+        }
+    }
+
+    @Override
+    public void onRequestPermissionsResult(int requestCode,
+                                           String permissions[], int[] grantResults) {
+        switch (requestCode) {
+            case 20: {
+                // If request is cancelled, the result arrays are empty.
+                if (grantResults.length > 0
+                        && grantResults[0] == PackageManager.PERMISSION_GRANTED) {
+                    // permission was granted, yay! Do the
+                    // contacts-related task you need to do.
+                    Log.d("...", "granted");
+                } else {
+                    Log.d("...", "denied");
+                    // permission denied, boo! Disable the
+                    // functionality that depends on this permission.
+                }
+            }
+
+            // other 'case' lines to check for other
+            // permissions this app might request
+        }
+    }
+
     public void startStreaming(EventData event) {
 
 
@@ -116,6 +174,7 @@ public class MainActivity extends Activity implements
         if (mChosenAccountName == null) {
             return;
         }
+        credential.setSelectedAccountName(mChosenAccountName);
         new GetLiveEventsTask().execute();
     }
 

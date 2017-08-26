@@ -30,6 +30,7 @@ import android.widget.Toast;
 
 import com.android.volley.toolbox.ImageLoader;
 import com.android.volley.toolbox.NetworkImageView;
+import com.eastern.doby.R;
 import com.google.android.apps.watchme.util.EventData;
 import com.google.android.gms.common.ConnectionResult;
 import com.google.android.gms.common.api.GoogleApiClient;
@@ -37,6 +38,7 @@ import com.google.android.gms.common.api.GoogleApiClient.ConnectionCallbacks;
 import com.google.android.gms.plus.Plus;
 import com.google.android.gms.plus.PlusOneButton;
 import com.google.android.gms.plus.model.people.Person;
+import com.google.gson.Gson;
 
 import java.util.List;
 
@@ -90,7 +92,7 @@ public class EventsListFragment extends Fragment implements
         if (!isAdded()) {
             return;
         }
-
+        Log.d("event", "event:" + new Gson().toJson(events));
         mGridView.setAdapter(new LiveEventAdapter(events));
     }
 

@@ -26,6 +26,7 @@ import android.os.Binder;
 import android.os.IBinder;
 import android.util.Log;
 
+import com.eastern.doby.R;
 import com.google.android.apps.watchme.util.Utils;
 
 /**

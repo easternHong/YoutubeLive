@@ -162,6 +162,7 @@ public class YouTubeApi {
 
         for (LiveBroadcast broadcast : returnedList) {
             event = new EventData();
+            broadcast.getSnippet().setDescription("72在此");
             event.setEvent(broadcast);
             String streamId = broadcast.getContentDetails().getBoundStreamId();
             if (streamId != null) {
