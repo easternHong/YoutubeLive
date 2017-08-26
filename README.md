@@ -1,23 +1,28 @@
-YouTube WatchMe for Android
-===========
 
-The code is a reference implementation for an Android OS application that creates a YouTube Live Streaming event and streams into that event.
+此工程从WatchMe fork过来。
 
-For more information, you can read the [Youtube API blog post](http://apiblog.youtube.com/2013/08/heres-my-playlist-so-submit-video-maybe.html).
+[官方教程](https://developers.google.com/youtube/v3/live/getting-started)
+总体来说，可以分为三部分：
+>	创建Google Account
+>	创建凭据：
+>	客户端编码
 
-This application utilizes [YouTube Data API v3](https://developers.google.com/youtube/v3/) , [YouTube Live Streaming API](https://developers.google.com/youtube/v3/live/), [Google Play Services](https://developer.android.com/google/play-services/index.html) and [Plus API](https://developers.google.com/+/mobile/android/Google).
 
-To use this application,
 
-1. In your [Google Developers Console](https://console.developers.google.com),
- 1. Enable the YouTube Data API v3 and Google+ API.
- 1. Create a client ID for Android, using your SHA1 and package name.
-1. [Enable YouTube Live Streaming for your channel](https://support.google.com/youtube/answer/2474026?hl=en).
-1. Update the [JNI code](https://github.com/youtube/yt-watchme/blob/master/app/src/main/jni/ffmpeg-jni.c) with respect to [Live Streaming Guide](https://support.google.com/youtube/answer/2853702?hl=en).
-1. Include cross-platform compiled streaming libraries.
- 1. Either [libffmpeg.so](https://trac.ffmpeg.org/wiki/CompilationGuide/Android) under src/main/jniLibs/armeabi,
- 1. or another streaming library with modifying VideoStreamingInterface
+###创建GoogleAccount
+[点这里](https://developers.google.com/youtube/v3/live/getting-started#before-you-start)
 
-![alt tag](http://i59.tinypic.com/e8spqu.png)
+###创建凭据
 
-![alt tag](http://i61.tinypic.com/16behq1.png)
+1.创建Google Project
+[点击这里](https://developers.google.com/youtube/registering_an_application#create_project)
+2.创建 
+ **OAuth 2.**：这一步，需要选择指定平台：Android，iOS，Web。
+	Android平台的凭据，填充的**SHA1**,必须要和运行的App的签名一致，也就是使用同一个**keystore**
+ **API keys**
+
+ [Android平台的配置](https://developers.google.com/youtube/v3/quickstart/android)
+
+###客户端的编码
+
+[官方例子](https://developers.google.com/youtube/v3/quickstart/android)
